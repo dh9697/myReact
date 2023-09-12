@@ -1,0 +1,80 @@
+230911
+npm -v
+npx -v
+1. npx create-react-app .
+안되면 npm i npx -g
+2. npm start
+
+
+<react 설치 환경>
+node.js : runtime, 자바스크립트를 기계어로 바꿔줌. 
+==> npm 패키지가 내장되어있음
+    npm : 패키지 매니저
+          라이브러리 버전을 관리(설치, 삭제등)
+    npx : 라이브러리를 설치하고 사용한 다음 삭제시킴
+create-react-app : 리액트 앱 구조를 만들어주는 초기화 프로그램
+ - 사용법 ex) create-react-app 폴더이름 : 새 폴더를 밑에 만듦
+              create-react-app .        : 현재 폴더에 만듦
+집에서는 저장소 클론 후
+npm install
+
+
+JSX : HTML 문법과 유사한 script 언어
+      리액트에서 실제 HTML로 변환됨
+- 장점 : HTML과 유사한 문법, javascript코드를 바로 쓸 수 있음
+- 단점 : HTML,CSS 를 그대로 사용하지 못하는 경우가 있음
+         ex) class => className, background-color => backgroundColor
+함수와 컴포넌트를 구분하기 위해 컴포넌트는 항상 앞글자 대문자
+
+prettier - code formatter
+왼쪽 아래 설정
+format 검색
+editor:default formatter => prettier
+tab => prettier,editor 맞추기
+
+npm install styled-components
+
+vscode-styled-components
+: styled문법에서 css 자동완성
+
+230912
+
+props = properties
+
+<input class = "" id="" type="" value="" />
+
+상속의 개념 : 부모가 자식에게 물려주는 유산        
+            : 부모가 준 모든 속성을 그대로 가진다.
+            : 자식이 따로 자식만의 속성을 가질 수 있다.
+
+Destructuring 문법
+: 복잡한 객체 구조의 경우, 객체 내의 key값을 사용하려면 사용 문법이 매우 길어지는 불편함이 있음.
+ex) Object.obj1.obj2...
+: 객체를 해체해서 간단하게 내부 key를 사용하게 하는 문법
+ex) Object = { name: "Tom", age: 15, 학년 : { grade: 6 }};
+const { name, age, 학년 : { grade }} = Object;
+console.log(grade); // 6
+
+<react Hook>
+useState 함수이면서 컴포넌트
+useEffect
+useRef
+useContext
+useMemo
+useReducer
+후크는 처음 랜더링에만 호출됨
+글로벌로 빼내면 다른 함수이름에도 영향을 끼치기 때문에 함수스코프 내에서 하는 방법
+
+객체의 디스트럭쳐링
+const {name, score} = 객체이름;
+name은 곧 객체의 key 이므로 이름이 같아야(spell이 정확) 한다.
+
+배열의 디스츠럭쳐링
+const fruits = ["사과", "바나나", "망고"];
+const [apple, banana, mango] = fruits;
+배열은 순서가 중요함.
+
+useState함수의 return값은 배열이고 
+배열의 첫 번째 아이템은 value, 두번째 아이템은 value를 수정하는 콜백함수이름
+
+useState함수의 리턴값은 [value, setter function]
