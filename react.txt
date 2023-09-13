@@ -37,6 +37,7 @@ npm install styled-components
 vscode-styled-components
 : styled문법에서 css 자동완성
 
+
 230912
 
 props = properties
@@ -78,3 +79,20 @@ useState함수의 return값은 배열이고
 배열의 첫 번째 아이템은 value, 두번째 아이템은 value를 수정하는 콜백함수이름
 
 useState함수의 리턴값은 [value, setter function]
+
+
+230913
+웹페이지 만들 때 font-size 정하기 5개 정도
+bigTitle : 3.5rem
+smallTitle : 2.5rem
+title : 1.5rem
+content : 1rem
+detail : 0.7rem
+
+*{} => app.js에 createGlobalStyle
+
+Spread Operator [...배열 이름]
+const arr1 = [1,2,3,4,5]
+const arr2 = ['a','b','c']
+const arr3 = [...arr1,...arr2] // [1,2,3,4,5,'a','b','c']
+const newArray = [...arr1,6] // [1,2,3,4,5,6]
