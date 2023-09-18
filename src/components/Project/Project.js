@@ -1,12 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { Box } from "./Box";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   &::after {
     position: absolute;
     top: 0;
@@ -19,8 +20,8 @@ const Container = styled.div`
   }
 `;
 const Video = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -31,20 +32,14 @@ const Video = styled.div`
     object-fit: cover;
   }
 `;
-const Head = styled.div`
-  width: 20%;
-  height: 20vh;
+const Head = styled.h1`
+  width: 100%;
+  height: 15vh;
   margin: 0 auto;
-  background-color: orange; //transparent;
+  padding: 20px;
+  background-color: transparent;
   text-align: center;
   font-size: 3rem;
-`;
-const Box = styled.div`
-  width: 50vw;
-  height: 60vh;
-  text-align: center;
-  h2 {
-  }
 `;
 
 export function Project() {
@@ -56,11 +51,8 @@ export function Project() {
             <source src="/videos/rainbow.mp4" type="video/mp4" />
           </video>
         </Video>
-        <Head></Head>
-        <Box>
-          <h2>The Solidyoung Won't Let Me Sleep</h2>
-          <p>Is Jihee hungry?</p>
-        </Box>
+        <Head>!Melon</Head>
+        <Box />
       </Container>
     </>
   );
