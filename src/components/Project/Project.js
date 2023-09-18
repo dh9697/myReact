@@ -1,5 +1,8 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import { Box } from "./Box";
+import { Clip } from "./Clip";
+import { Footer } from "./Footer";
+import { Message } from "./Message";
 
 const Container = styled.div`
   display: flex;
@@ -25,7 +28,7 @@ const Video = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -100;
+  z-index: -1000;
   video {
     width: 100%;
     height: 100%;
@@ -34,25 +37,36 @@ const Video = styled.div`
 `;
 const Head = styled.h1`
   width: 100%;
-  height: 15vh;
   margin: 0 auto;
   padding: 20px;
   background-color: transparent;
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
 `;
+
+// const XLARGE = "3rem";
+// const LARGE = "2rem";
+// const MEDIUM = "1.5rem";
+// const SMALL = "1rem";
+// const XSMALL = "0.7rem";
 
 export function Project() {
   return (
     <>
       <Container>
         <Video>
-          <video muted autoPlay loop>
+          <video muted loop>
             <source src="/videos/rainbow.mp4" type="video/mp4" />
           </video>
         </Video>
         <Head>!Melon</Head>
-        <Box />
+        <Message />
+        <Footer />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Clip />}></Route>
+          </Routes>
+        </BrowserRouter>
       </Container>
     </>
   );
