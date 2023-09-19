@@ -1,13 +1,36 @@
 import { useState } from "react";
 import { styled, keyframes } from "styled-components";
 
-const fadeOut = keyframes`
+const fadeOutH2 = keyframes`
 from{
-  opacity:1;
+  opacity: 1;
+  transform: translateY(0);
 }
-to {
-  opacity:0;
-  }
+to{
+  opacity: 0;
+  transform: translateY(-10px);
+}
+`;
+const fadeOutP = keyframes`
+from{
+  opacity: 1;
+  transform: translateY(0);
+}
+to{
+  opacity: 0;
+  transform: translateY(10px);
+}
+`;
+const fadeinout = keyframes`
+0%{
+  opacity: 0;
+}
+50%{
+  opacity: 1;
+}
+100%{
+opacity: 0;
+}
 `;
 
 const Container = styled.div`
@@ -18,19 +41,24 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 20px;
+
   & h2 {
     text-align: center;
     width: 500px;
     font-weight: 400;
     font-size: 3.5rem;
     line-height: 60px;
-    animation: ${fadeOut} 100 ease-in-out;
+    &.fadeout {
+      animation: ${fadeOutH2} 0.5s 0.4s forwards ease-in-out;
+    }
   }
   & p {
     font-style: italic;
     font-size: 1rem;
     font-weight: 400;
-    animation: ${fadeOut} 100 ease-in-out;
+    &.fadeout {
+      animation: ${fadeOutP} 0.5s 0.2s forwards ease-in-out;
+    }
   }
 `;
 const EnterButton = styled.button`
@@ -39,32 +67,63 @@ const EnterButton = styled.button`
   background-color: transparent;
   border: 1px solid black;
   border-radius: 10px;
-  letter-spacing: -1px;
   cursor: pointer;
+  &.fadeout {
+    animation: ${fadeOutP} 0.5s 0.1s forwards ease-in-out;
+  }
   &:hover {
     border-radius: 10px;
-    border: 2px solid black;
-    transition: all 100 linear;
+    border: 1px solid white;
+    color: white;
+    transition: all 0.1s linear;
+  }
+`;
+const Intro = styled.div`
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  letter-spacing: 3px;
+  & h2 {
+    font-size: 3rem;
+  }
+  & p {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  &.fadeinout {
+    animation: ${fadeinout} 3.5s 1s forwards ease-in-out;
   }
 `;
 
-export function Message() {
-  const [isClicked, setIsClicked] = useState(false);
+export function Message({ isClicked, setIsClicked }) {
+  // const [isClicked, setIsClicked] = useState(false);
 
   const EnterButtonClick = () => {
     setIsClicked(true);
   };
   return (
     <>
-      <Container isClicked={isClicked}>
-        <h2 className={isClicked ? "fadeOut" : ""}>
+      <Container>
+        <h2 className={isClicked ? "fadeout" : null}>
           The Radio Won't Let Me Sleep
         </h2>
-        <p className={isClicked ? "fadeOut" : ""}>
+        <p className={isClicked ? "fadeout" : null}>
           The best songs I've ever known
         </p>
-        <EnterButton onClick={EnterButtonClick}>Enter</EnterButton>
+        <EnterButton
+          onClick={EnterButtonClick}
+          className={isClicked ? "fadeout" : null}
+        >
+          Enter
+        </EnterButton>
       </Container>
+      <Intro className={isClicked ? "fadeinout" : null}>
+        <h2>ReactProject</h2>
+        <p>Director: Kimdahye</p>
+      </Intro>
     </>
   );
 }

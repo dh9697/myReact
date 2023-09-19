@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { Clip } from "./Clip";
 import { Footer } from "./Footer";
 import { Message } from "./Message";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -51,20 +52,25 @@ const Head = styled.h1`
 // const XSMALL = "0.7rem";
 
 export function Project() {
+  const [isClicked, setIsClicked] = useState(false);
   return (
     <>
       <Container>
         <Video>
-          <video muted loop>
+          <video muted autoPlay loop>
             <source src="/videos/rainbow.mp4" type="video/mp4" />
           </video>
         </Video>
         <Head>!Melon</Head>
-        <Message />
+        <Message isClicked={isClicked} setIsClicked={setIsClicked} />
         <Footer />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Clip />}></Route>
+            <Route path="/" element={<Clip />}>
+              <Route></Route>
+              <Route></Route>
+              <Route></Route>
+            </Route>
           </Routes>
         </BrowserRouter>
       </Container>

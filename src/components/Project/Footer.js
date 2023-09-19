@@ -1,14 +1,34 @@
+import { useState } from "react";
 import { styled, keyframes } from "styled-components";
 
-const MovingText = keyframes`
+const MovingText1 = keyframes`
 0%{
     transform: translateX(100%);
+    -webkit-transform: translateX(100%);
 }
  100% {
     transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
   }
 `;
-
+const MovingText2 = keyframes`
+0%{
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+}
+100%{
+  transform: translateX(-200%);
+  -webkit-transform: translateX(-200%);
+}
+`;
+const fadeoutfooter = keyframes`
+from{
+  display: block;
+}
+to{
+  display: none;
+}
+`;
 const Container = styled.div`
   width: 100%;
   height: 40px;
@@ -17,23 +37,35 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   display: flex;
-  & span {
+  white-space: nowrap;
+  & .text1 {
     display: inline-block;
     /* span의 inline 속성은 박스가 아니기 때문에 가로값이 존재하지 않아서 translateX 명령을 수행할 수 없기 때문에 inline-block 적용 */
     width: 100%;
     transform: translateX(100%);
-    animation: ${MovingText} 8s infinite linear;
+    animation: ${MovingText1} 8s infinite linear;
+  }
+  & .text2 {
+    display: inline-block;
+    width: 100%;
+    transform: translateX(100%);
+    animation: ${MovingText2} 8s 4s infinite linear;
+  }
+  &.fadeout {
+    animation: ${fadeoutfooter} 1s;
   }
 `;
 
-export function Footer() {
+export function Footer({ isClicked, setIsClicked }) {
   return (
     <>
-      <Container>
-        <span>first contents text</span>
-        <span>second contents text</span>
-        <span>first contents text</span>
-        <span>second contents text</span>
+      <Container className={isClicked ? "fadeoutfooter" : ""}>
+        <span className={`text1 ${isClicked ? "fadeoutfooter" : ""}`}>
+          1first contents text 2second contents text
+        </span>
+        <span className={`text2 ${isClicked ? "fadeoutfooter" : ""}`}>
+          3third contents text 4fourth contents text
+        </span>
       </Container>
     </>
   );
