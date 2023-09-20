@@ -21,14 +21,7 @@ const MovingText2 = keyframes`
   -webkit-transform: translateX(-200%);
 }
 `;
-const fadeoutfooter = keyframes`
-from{
-  display: block;
-}
-to{
-  display: none;
-}
-`;
+
 const Container = styled.div`
   width: 100%;
   height: 40px;
@@ -51,19 +44,16 @@ const Container = styled.div`
     transform: translateX(100%);
     animation: ${MovingText2} 8s 4s infinite linear;
   }
-  &.fadeout {
-    animation: ${fadeoutfooter} 1s;
-  }
 `;
 
 export function Footer({ isClicked, setIsClicked }) {
   return (
     <>
-      <Container className={isClicked ? "fadeoutfooter" : ""}>
-        <span className={`text1 ${isClicked ? "fadeoutfooter" : ""}`}>
+      <Container style={{ display: isClicked ? "none" : "block" }}>
+        <span className="text1">
           1first contents text 2second contents text
         </span>
-        <span className={`text2 ${isClicked ? "fadeoutfooter" : ""}`}>
+        <span className="text2">
           3third contents text 4fourth contents text
         </span>
       </Container>

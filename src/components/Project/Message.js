@@ -67,6 +67,7 @@ const EnterButton = styled.button`
   background-color: transparent;
   border: 1px solid black;
   border-radius: 10px;
+  z-index: 100;
   cursor: pointer;
   &.fadeout {
     animation: ${fadeOutP} 0.5s 0.1s forwards ease-in-out;
@@ -107,20 +108,20 @@ export function Message({ isClicked, setIsClicked }) {
   return (
     <>
       <Container>
-        <h2 className={isClicked ? "fadeout" : null}>
+        <h2 className={isClicked ? "fadeout" : ""}>
           The Radio Won't Let Me Sleep
         </h2>
-        <p className={isClicked ? "fadeout" : null}>
+        <p className={isClicked ? "fadeout" : ""}>
           The best songs I've ever known
         </p>
         <EnterButton
           onClick={EnterButtonClick}
-          className={isClicked ? "fadeout" : null}
+          className={isClicked ? "fadeout" : ""}
         >
           Enter
         </EnterButton>
       </Container>
-      <Intro className={isClicked ? "fadeinout" : null}>
+      <Intro className={isClicked ? "fadeinout" : ""}>
         <h2>ReactProject</h2>
         <p>Director: Kimdahye</p>
       </Intro>

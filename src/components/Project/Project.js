@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { Clip } from "./Clip";
-import { Footer } from "./Footer";
-import { Message } from "./Message";
 import { useState } from "react";
+import { MainPage } from "./MainPage";
+import { Artist } from "./Artist";
+import { Recommand } from "./Recommand";
 
 const Container = styled.div`
   display: flex;
@@ -36,14 +37,6 @@ const Video = styled.div`
     object-fit: cover;
   }
 `;
-const Head = styled.h1`
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: transparent;
-  text-align: center;
-  font-size: 2.5rem;
-`;
 
 // const XLARGE = "3rem";
 // const LARGE = "2rem";
@@ -53,6 +46,7 @@ const Head = styled.h1`
 
 export function Project() {
   const [isClicked, setIsClicked] = useState(false);
+
   return (
     <>
       <Container>
@@ -61,16 +55,12 @@ export function Project() {
             <source src="/videos/rainbow.mp4" type="video/mp4" />
           </video>
         </Video>
-        <Head>!Melon</Head>
-        <Message isClicked={isClicked} setIsClicked={setIsClicked} />
-        <Footer />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Clip />}>
-              <Route></Route>
-              <Route></Route>
-              <Route></Route>
-            </Route>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/clip" element={<Clip />} />
+            <Route path="/artist" element={<Artist />} />
+            <Route path="/recommand" element={<Recommand />} />
           </Routes>
         </BrowserRouter>
       </Container>
