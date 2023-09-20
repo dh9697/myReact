@@ -5,11 +5,11 @@ const Container = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  &i {
+  & i {
     font-size: 1.8rem;
     margin-bottom: 3px;
   }
-  &span {
+  & span {
     font-size: 0.8rem;
     font-weight: bold;
   }

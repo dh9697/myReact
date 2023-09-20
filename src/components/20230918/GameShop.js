@@ -10,6 +10,7 @@ import { SingleProduct } from "./SingleProduct";
 import { ProductWrapper } from "./ProductWrapper";
 import { createContext, useState } from "react";
 import games from "./db/Data";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 export const GameContext = createContext();
 const defaultCheckList = games.map((game) => {
@@ -19,9 +20,10 @@ const defaultCheckList = games.map((game) => {
 export function GameShop() {
   const [checkList, setCheckList] = useState(defaultCheckList);
   // console.log(checkList);
+  const [user, setUser] = useState({});
   return (
     <>
-      <GameContext.Provider value={{ checkList, setCheckList }}>
+      <GameContext.Provider value={{ checkList, setCheckList, user, setUser }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Navbar />}>
@@ -38,7 +40,14 @@ export function GameShop() {
               ex) www.gameshop.com/products/1004/12 => error
               */}
               </Route>
-              <Route path="dashboard" element={<Dashboard />} />
+              <Route
+                path="dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              ></Route>
               <Route path="login" element={<Login />} />
               <Route path="cart" element={<Other />} />
               <Route path="*" element={<Error />} />
