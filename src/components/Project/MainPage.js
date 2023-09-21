@@ -40,7 +40,7 @@ export function MainPage() {
         <Message isClicked={isClicked} setIsClicked={setIsClicked} />
         <Footer isClicked={isClicked} setIsClicked={setIsClicked} />
       </Container>
-      <Hover />
+      <Hover isClicked={isClicked} setIsClicked={setIsClicked} />
     </>
   );
 }

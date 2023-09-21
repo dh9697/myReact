@@ -1,12 +1,14 @@
 import styled, { keyframes } from "styled-components";
 import { useState } from "react";
+import record from "./image/record.png";
+import { HoverFooter } from "./HoverFooter";
 
-const fadein = keyframes`
+const rotate = keyframes`
 0%{
-  opacity: 0;
+  transform: rotate(0);
 }
 100%{
-  opacity: 1;
+  transform: rotate(360deg);
 }
 `;
 const Container = styled.div`
@@ -15,8 +17,10 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  &.fadein {
-    animation: ${fadein} 3s 3s forwards ease-in;
+  opacity: 0;
+  transition: all 2s linear;
+  &.show {
+    opacity: 1;
   }
 `;
 const Head = styled.div`
@@ -25,7 +29,6 @@ const Head = styled.div`
   left: 0;
   width: 100%;
   height: 70px;
-  background-color: aliceblue;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,6 +36,19 @@ const Head = styled.div`
     margin: 0 2rem;
     display: flex;
     gap: 2rem;
+    & h3 {
+      font-size: 1rem;
+      font-weight: 400;
+      color: white;
+      & span {
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        background-color: white;
+        border-radius: 100%;
+        margin: 3px 10px;
+      }
+    }
   }
 `;
 const Body = styled.div`
@@ -48,79 +64,41 @@ const Body = styled.div`
     color: white;
     & img {
       width: 100%;
+      &:hover {
+        animation: ${rotate} 5s infinite linear;
+      }
     }
   }
 `;
-const Footer = styled.div`
-  position: absolute;
-  bottom: 1.5rem;
-  left: 0;
-  width: 100%;
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  & h2 {
-    width: 270px;
-    text-align: center;
-    font-size: 2rem;
-    line-height: 30px;
-    font-weight: 400;
-    color: white;
-    cursor: pointer;
-  }
-  & div {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 2rem;
-    & button {
-      width: 50px;
-      height: 30px;
-      color: white;
-      background-color: transparent;
-      border: 1px solid white;
-      cursor: pointer;
-    }
-  }
-`;
-const InfoBtn = styled.button`
-  border: 0;
-`;
-const MenuBtn = styled.button``;
-const VolBtn = styled.button``;
 
 export function Hover() {
-  const [isClicked, setIsClicked] = useState(false);
+  const [show, setShow] = useState("");
+  function onMouseEnter() {
+    setTimeout(() => {
+      setShow("show");
+      console.log("timeout");
+    }, 6000);
+  }
   return (
     <>
-      <Container className={isClicked ? "fadein" : ""}>
+      <Container onMouseEnter={onMouseEnter} className={show}>
         <Head>
           <div>
-            <h3>순서</h3>
-            <h3>노래이름</h3>
+            <h3>01</h3>
+            <h3>forest</h3>
           </div>
           <div>
             <h3>
-              재생시간<span>0</span>노래시간
+              1:30<span></span>3:17
             </h3>
           </div>
         </Head>
         <Body>
-          <a href="https://www.google.com">
-            <img src="image/record.jpg" alt="record.jpg" />
+          <a href="/clip">
+            <img src={record} alt="record.png" />
           </a>
         </Body>
-        <Footer>
-          <h2>The Radio Won't Let Me Sleep</h2>
-          <div>
-            <InfoBtn>Info</InfoBtn>
-            <MenuBtn>menu</MenuBtn>
-            <VolBtn>!vol</VolBtn>
-          </div>
-        </Footer>
+        <HoverFooter />
       </Container>
     </>
   );
