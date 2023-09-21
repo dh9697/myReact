@@ -6,6 +6,7 @@ import { Error } from "./Error";
 import { useState } from "react";
 import styled from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Modal } from "./Modal";
 
 const Container = styled.div`
   width: 80%;
@@ -32,6 +33,7 @@ export function MyRouter() {
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<Error />} />
             </Routes>
+            <Modal />
           </Content>
         </Container>
       </BrowserRouter>
