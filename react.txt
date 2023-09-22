@@ -116,3 +116,11 @@ vscode compact 설정에서 바꿈
 OOP = Object Oriented Programming
 
 props 지옥 = prop drilling
+
+20230922
+
+framer-morion
+리액트에서 사용하는 애니메이션 라이브러리
+설치
+npm i framer-motion
+package.json dependencies에서 설치 확인
