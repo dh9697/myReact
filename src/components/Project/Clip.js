@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { HoverFooter } from "./HoverFooter";
-import { Swiper } from "./Slide";
+import { SlideBox } from "./SlideBox";
 
 const Container = styled.div`
   width: 100%;
@@ -32,7 +32,7 @@ export function Clip() {
     <>
       <Container onMouseEnter={onMouseEnter}>
         <Head className={show}>!Melon</Head>
-        <Swiper />
+        <SlideBox />
         <HoverFooter className={show} />
       </Container>
     </>

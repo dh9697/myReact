@@ -12,9 +12,11 @@ to{
 const fadeup = keyframes`
 from{
   height: 50%;
+  transform: translateY(0);
 }
 to{
   height: 0;
+  transform: translateY(-400%);
 }
 
 `;
@@ -85,7 +87,7 @@ const Content = styled.div`
   gap: 50px;
   padding: 30px 50px;
   opacity: 0;
-  transition: all 0.8s linear;
+  transition: all 0.2s linear;
   &.visible {
     opacity: 1;
   }
