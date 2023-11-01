@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { GameContext } from "./GameShop";
+import { Purchase } from "./Purchase";
 
 const Container = styled.div`
   position: relative;
@@ -40,6 +41,7 @@ const PayBtn = styled.button`
 export function Other() {
   const { checkList, setCheckList, games } = useContext(GameContext);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [purchasing, setPurchasing] = useState(false);
   const NewList = games.filter((g, i) => checkList[i].checked);
   // console.log(NewList);
 
@@ -53,9 +55,9 @@ export function Other() {
     });
     setCheckList(temp);
   }
-  function onClickBtn() {}
-
-  // const [totalPrice, setTotalPrice] = useState(0);
+  function onClickBtn() {
+    setPurchasing(true);
+  }
 
   useEffect(() => {
     let price = 0;
@@ -67,23 +69,29 @@ export function Other() {
 
   return (
     <>
-      <Container>
-        {NewList.map((game) => (
-          <Card key={game.id}>
-            <Img src={game.image} />
-            <div>
-              <Text>Title: {game.title}</Text>
-              <Text>Genre: {game.genre}</Text>
-              <Text>Price: {game.price}원</Text>
-            </div>
-            <DeleteBtn id={game.id} onClick={onClick}>
-              Delete
-            </DeleteBtn>
-          </Card>
-        ))}
-      </Container>
-      <h3>Total : {`${totalPrice}원`}</h3>
-      <PayBtn onClick={onClickBtn}>결제버튼</PayBtn>
+      {!purchasing ? (
+        <>
+          <Container>
+            {NewList.map((game) => (
+              <Card key={game.id}>
+                <Img src={game.image} />
+                <div>
+                  <Text>Title: {game.title}</Text>
+                  <Text>Genre: {game.genre}</Text>
+                  <Text>Price: {game.price}원</Text>
+                </div>
+                <DeleteBtn id={game.id} onClick={onClick}>
+                  Delete
+                </DeleteBtn>
+              </Card>
+            ))}
+          </Container>
+          <h3>Total : {`${totalPrice}원`}</h3>
+          <PayBtn onClick={onClickBtn}>결제버튼</PayBtn>
+        </>
+      ) : (
+        <Purchase list={NewList} />
+      )}
     </>
   );
 }

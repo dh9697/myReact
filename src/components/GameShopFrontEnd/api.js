@@ -18,11 +18,14 @@ export function purchaseGames(games) {
 
   return fetch(`http://localhost:8080/products/purchaselist`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(purchaseList),
   }).then((response) => response.json());
 }
 export function getAllPurchasedGames() {
-  return fetch(`http:localhost8080/products/purchaselist`, {
+  return fetch(`http://localhost:8080/products/purchase`, {
     method: "GET",
   }).then((response) => response.json());
 }
