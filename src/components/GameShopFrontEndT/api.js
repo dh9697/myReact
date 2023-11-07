@@ -10,9 +10,10 @@ export function getGameById(id) {
   }).then((response) => response.json());
 }
 
-export function purchaseGames(games) {
+export function purchaseGames(games, loginId) {
   const purchases = games.map((game) => ({
     game: game,
+    loginId: loginId,
     quantity: 1, // 원하는 구매 수량을 여기에 설정
   }));
   return fetch(`http://localhost:8080/products/purchaselist`, {
@@ -21,17 +22,18 @@ export function purchaseGames(games) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(purchases),
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .catch(() => "ERROR");
 }
 
-export function getAllPurchasedGames() {
-  return fetch(`http://localhost:8080/products/purchase`, {
+export function getAllPurchasedGames(loginId) {
+  return fetch(`http://localhost:8080/products/purchase/${loginId}`, {
     method: "GET",
   }).then((response) => response.json());
 }
 
 export function signUp(user) {
-  console.log("signup api called");
   return fetch(`http://localhost:8081/api/member/signup`, {
     method: "POST",
     headers: {
@@ -42,7 +44,6 @@ export function signUp(user) {
 }
 
 export function login(user) {
-  console.log("login api called");
   return fetch(`http://localhost:8081/api/member/login`, {
     method: "POST",
     headers: {

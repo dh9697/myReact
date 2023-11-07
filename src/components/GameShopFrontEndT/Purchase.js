@@ -1,25 +1,39 @@
-import { useQuery } from "react-query";
 import { purchaseGames } from "./api";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { useQuery } from "react-query";
+import { GameContext } from "./GameShop";
 
-export function Purchase() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const purchasedGames = location.state?.newList;
-  const { data, isLoading } = useQuery("purchase", () => {
-    if (purchasedGames && purchasedGames.length > 0) {
-      purchaseGames(purchasedGames);
-    } else {
-      navigate("/cart");
+export function Purchase({
+  items,
+  setPurchasing,
+  setPurchaseComplete,
+  setPurchaseFailed,
+}) {
+  const { loginState } = useContext(GameContext);
+  const { data } = useQuery(
+    "purchase",
+    () => purchaseGames(items, loginState.id),
+    {
+      retry: 0,
+      staleTime: 1000,
     }
-  });
-  return (
-    <>
-      {isLoading ? (
-        <h1>구매 처리중.....</h1>
-      ) : (
-        <Navigate to="/dashboard"></Navigate>
-      )}
-    </>
   );
+
+  useEffect(() => {
+    if (data && data !== "ERROR") {
+      console.log("구매완료", data);
+      setTimeout(() => {
+        setPurchaseComplete(true);
+        setPurchasing(false);
+      }, 1000);
+    } else if (data === "ERROR") {
+      console.log("구매실패");
+      setTimeout(() => {
+        setPurchaseFailed(true);
+        setPurchasing(false);
+      }, 1000);
+    }
+  }, [data]);
+
+  return <h1>구매 처리중.....</h1>;
 }

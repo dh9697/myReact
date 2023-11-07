@@ -15,7 +15,6 @@ import { useQuery } from "react-query";
 import { getAllGames } from "./api";
 import { Register } from "./Register";
 import { Logout } from "./Logout";
-import { Purchase } from "./Purchase";
 
 const client = new QueryClient();
 export const GameContext = createContext();
@@ -40,11 +39,13 @@ export function GameShop() {
 
 function GameShopLoader({ games, gamesCheckList }) {
   const [checkList, setCheckList] = useState(gamesCheckList);
-  const [user, setUser] = useState({});
+  const [loginState, setLoginState] = useState(
+    JSON.parse(localStorage.getItem("loginState"))
+  );
   return (
     <>
       <GameContext.Provider
-        value={{ checkList, setCheckList, user, setUser, games }}
+        value={{ checkList, setCheckList, loginState, setLoginState, games }}
       >
         <BrowserRouter>
           <Routes>
@@ -66,7 +67,6 @@ function GameShopLoader({ games, gamesCheckList }) {
               <Route path="login" element={<Login />} />
               <Route path="logout" element={<Logout />} />
               <Route path="register" element={<Register />} />
-              <Route path="purchase" element={<Purchase />} />
               <Route path="cart" element={<Cart />} />
               <Route path="*" element={<Error />} />
             </Route>
