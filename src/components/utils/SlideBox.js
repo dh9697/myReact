@@ -50,7 +50,7 @@ const Btn1 = styled(Btn)`
   left: 100px;
 `;
 const Btn2 = styled(Btn)`
-  right: 100px;
+  right: 10%;
 `;
 
 export function SlideBox() {

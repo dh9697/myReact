@@ -47,8 +47,10 @@ const Info = styled.div`
   font-weight: 500;
 `;
 
-export function OpenWeather() {
+export function OpenWeather({ cityName }) {
   const API_KEY = "b353ec7a9a2f1026b55dc52fc9d679bf";
+  const API_KEY_NINJA = "Lw9i6FbdDRCvwGKJ7ERDPQ==7ioKn3NN5PL57Ft5";
+
   const [icon, setIcon] = useState(null);
   const [temp, setTemp] = useState(0);
   const [city, setCity] = useState("");
@@ -63,10 +65,36 @@ export function OpenWeather() {
      - 빈 배열[]을 사용하면 최초 로딩 시 딱 한번만 실행됨.
           ex) useEffect(() => {}, []);
   */
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(geoOK, geoError);
+  //   console.log("useEffect");
+  // }, []);
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(geoOK, geoError);
-    console.log("useEffect");
-  }, []);
+    if (cityName) {
+      // 닌자한테 해당 도시의 위도, 경도를 요청
+      const urlToNinja = `https://api.api-ninjas.com/v1/city?name=${cityName}`;
+      fetch(urlToNinja, { headers: { "X-Api-Key": API_KEY_NINJA } })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          const position = {
+            coords: {
+              latitude: data[0].latitude,
+              longitude: data[0].longitude,
+            },
+          };
+          geoOK(position);
+        })
+        .catch((error) => {
+          geoError(error);
+        });
+    } else {
+      // 특정 도시 이름을 입력하지 않았을 때 현재 위치의 위도, 경도를 요청
+      navigator.geolocation.getCurrentPosition(geoOK, geoError);
+    }
+  });
 
   // navigator.geolocation.getCurrentPosition(geoOK, geoError);
   function geoOK(position) {
@@ -113,3 +141,4 @@ export function OpenWeather() {
 }
 // return은 바로 옆에 ()가 있어야 값을 return
 // https://tabler-icons.io/
+// https://api-ninjas.com/

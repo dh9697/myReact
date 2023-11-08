@@ -26,6 +26,7 @@ const Text = styled.p`
 export function Products() {
   const navigate = useNavigate();
   const { checkList, setCheckList } = useContext(GameContext);
+
   function onClick(id) {
     console.log(id);
     // 상대경로는 '/' 없이 작성함. 현재 주소 뒤에 추가됨
