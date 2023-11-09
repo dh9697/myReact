@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import FullScreenIcon from "./IconImage/FullScreen.png";
-import { useState } from "react";
+import { OpenWeather } from "./OpenWeather";
 
 const Container = styled.div`
   background-color: orange;
@@ -14,7 +13,7 @@ const Nav = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 const NavSection = styled.div`
-  background-color: red;
+  background-color: rgba(255, 110, 169);
   border: 1px solid black;
   width: 100%;
   height: 50px;
@@ -25,16 +24,19 @@ const NavItem = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 100%;
-  & div {
-    border: 1px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    & figure {
-      width: 20px;
-      height: 20px;
-    }
+`;
+const NavItemSection = styled.div`
+  border-right: 1px solid white;
+  & :last-child {
+    border-right: 0;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  & figure {
+    width: 20px;
+    height: 20px;
   }
 `;
 const IconImg = styled.img`
@@ -58,26 +60,23 @@ export function NavBar({ toggleFullScreen }) {
           </NavSection>
           <NavSection>
             <NavItem>
-              <div>
+              <NavItemSection>
                 <figure>
                   <IconImg src={FullScreenIcon} />
                 </figure>
                 <Btn>
                   오전 대충 시간 <br /> 2023-날-짜
                 </Btn>
-              </div>
-              <div>
-                <figure>
-                  <IconImg src={FullScreenIcon} />
-                </figure>
-                <Btn>현재 위치와 날씨</Btn>
-              </div>
-              <div>
+              </NavItemSection>
+              <NavItemSection>
+                <OpenWeather />
+              </NavItemSection>
+              <NavItemSection>
                 <figure>
                   <IconImg src={FullScreenIcon} />
                 </figure>
                 <Btn onClick={toggleFullScreen}>FullScreen F11 기능</Btn>
-              </div>
+              </NavItemSection>
             </NavItem>
           </NavSection>
         </Nav>

@@ -5,6 +5,8 @@ import UniverseIcon from "./IconImage/Universe.png";
 import MusicIcon from "./IconImage/Music.png";
 import DiscordIcon from "./IconImage/Discord.png";
 import SettingIcon from "./IconImage/Setting.png";
+import { useEffect, useState } from "react";
+import { AboutUs } from "./AboutUs";
 
 const Container = styled.div`
   background-color: blue;
@@ -14,10 +16,7 @@ const Container = styled.div`
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr 1fr;
-  margin: 70px;
-  & :hover {
-    background-color: gold;
-  }
+  /* margin: 70px; */
 `;
 const Icon = styled.div`
   background-color: green;
@@ -33,6 +32,9 @@ const Icon = styled.div`
     width: 60px;
     height: 60px;
   }
+  &:hover {
+    background-color: gold;
+  }
 `;
 const IconImg = styled.img`
   width: 100%;
@@ -45,10 +47,23 @@ const IconTitle = styled.p`
   padding: 0 5px;
 `;
 export function Main() {
+  // isPopupVisible 상태 변수를 선언하고 초기값 false로 설정
+  //  setIsPopupVisible은 isPopupVisible 상태 변수를 업데이트하는 함수
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const popupClick = () => {
+    if (!isPopupVisible) {
+      setIsPopupVisible(true);
+    }
+    // 처음 한번만 띄우기
+    // setIsPopup(true);
+    // toggle로 사용하기
+    // setIsPopupVisible(!isPopupVisible);
+    // setIsPopup((prev) => !prev);
+  };
   return (
     <>
       <Container>
-        <Icon>
+        <Icon onClick={popupClick}>
           <figure>
             <IconImg src={AboutUsIcon} />
           </figure>
@@ -85,6 +100,7 @@ export function Main() {
           <IconTitle>Setting</IconTitle>
         </Icon>
       </Container>
+      {isPopupVisible && <AboutUs onHide={() => setIsPopupVisible(false)} />}
     </>
   );
 }
