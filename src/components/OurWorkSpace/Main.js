@@ -1,4 +1,10 @@
 import styled from "styled-components";
+import AboutUsIcon from "./IconImage/AboutUs.png";
+import OurProjectIcon from "./IconImage/OurProject.png";
+import UniverseIcon from "./IconImage/Universe.png";
+import MusicIcon from "./IconImage/Music.png";
+import DiscordIcon from "./IconImage/Discord.png";
+import SettingIcon from "./IconImage/Setting.png";
 
 const Container = styled.div`
   background-color: blue;
@@ -8,7 +14,7 @@ const Container = styled.div`
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr 1fr;
-  margin: 50px;
+  margin: 70px;
   & :hover {
     background-color: gold;
   }
@@ -19,53 +25,64 @@ const Icon = styled.div`
   width: 100px;
   height: 100px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  & p {
-    color: white;
-    border: 1px solid black;
+  gap: 5px;
+  & figure {
+    width: 60px;
+    height: 60px;
   }
 `;
-
+const IconImg = styled.img`
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+`;
+const IconTitle = styled.p`
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 5px;
+`;
 export function Main() {
   return (
     <>
       <Container>
         <Icon>
-          <p>
-            아이콘 <br />
-            AboutUs
-          </p>
+          <figure>
+            <IconImg src={AboutUsIcon} />
+          </figure>
+          <IconTitle>AboutUs</IconTitle>
         </Icon>
         <Icon>
-          <p>
-            아이콘 <br />
-            OurProject
-          </p>
+          <figure>
+            <IconImg src={OurProjectIcon} />
+          </figure>
+          <IconTitle>OurProject</IconTitle>
         </Icon>
         <Icon>
-          <p>
-            아이콘 <br />
-            Universe
-          </p>
+          <figure>
+            <IconImg src={UniverseIcon} />
+          </figure>
+          <IconTitle>Universe</IconTitle>
         </Icon>
         <Icon>
-          <p>
-            아이콘 <br />
-            Music
-          </p>
+          <figure>
+            <IconImg src={MusicIcon} />
+          </figure>
+          <IconTitle>Music</IconTitle>
         </Icon>
         <Icon>
-          <p>
-            아이콘 <br />
-            Discord
-          </p>
+          <figure>
+            <IconImg src={DiscordIcon} />
+          </figure>
+          <IconTitle>Discord</IconTitle>
         </Icon>
         <Icon>
-          <p>
-            아이콘 <br />
-            setting
-          </p>
+          <figure>
+            <IconImg src={SettingIcon} />
+          </figure>
+          <IconTitle>Setting</IconTitle>
         </Icon>
       </Container>
     </>

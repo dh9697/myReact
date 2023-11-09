@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import FullScreenIcon from "./IconImage/FullScreen.png";
+import { useState } from "react";
 
 const Container = styled.div`
   background-color: orange;
@@ -27,10 +30,23 @@ const NavItem = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 5px;
+    & figure {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;
+const IconImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+const Btn = styled.button`
+  cursor: pointer;
+`;
 
-export function NavBar() {
+export function NavBar({ toggleFullScreen }) {
   return (
     <>
       <Container>
@@ -43,13 +59,24 @@ export function NavBar() {
           <NavSection>
             <NavItem>
               <div>
-                <p>Time : 시간입력</p>
+                <figure>
+                  <IconImg src={FullScreenIcon} />
+                </figure>
+                <Btn>
+                  오전 대충 시간 <br /> 2023-날-짜
+                </Btn>
               </div>
               <div>
-                <p>Time : 날짜입력</p>
+                <figure>
+                  <IconImg src={FullScreenIcon} />
+                </figure>
+                <Btn>현재 위치와 날씨</Btn>
               </div>
               <div>
-                <p>FullScreen F11 기능</p>
+                <figure>
+                  <IconImg src={FullScreenIcon} />
+                </figure>
+                <Btn onClick={toggleFullScreen}>FullScreen F11 기능</Btn>
               </div>
             </NavItem>
           </NavSection>
