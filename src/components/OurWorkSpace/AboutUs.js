@@ -38,7 +38,7 @@ const Logo = styled.div`
   transform: translateX(-50%);
 `;
 const LogoImg = styled.div`
-  width: 1rem;
+  width: 1.5rem;
   /* img 가운데 정렬하기 위해 flex 줘 봤는데 됨 이유는 모름 나중에 보기 */
   display: flex;
   & img {
@@ -73,9 +73,16 @@ const Content = styled.p`
 const Btn = styled.button`
   cursor: pointer;
 `;
-export function AboutUs({ onHide }) {
-  const [isVisible, setIsVisibe] = useState(true);
+export function AboutUs({ onAboutUsHide }) {
+  //  container 클릭했을 때 z-index값을 최상위로 하기 위해
+  //  const [zIndex, setZIndex] = useState(1);
+  //  const toFront = () =>{
+  //  setZIndex((prev)=> prev+1)
+  //  };
+  //  Container에 style={{zIndex}} 부여하고 mouseDown 함수에 toFront() 기능 넣어주면
+  //  클릭에 따라 z-inex 값이 증가하면서 원하는 화면이 구현되지만 클릭 수에 의존하여 다른 방법 모색
 
+  // PopupNavBar로 드래그 하기 위해
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ top: 500, left: 500 });
 
@@ -104,9 +111,10 @@ export function AboutUs({ onHide }) {
   }, [dragging]);
 
   const XBtnClick = () => {
-    onHide();
+    onAboutUsHide();
   };
-  return isVisible ? (
+
+  return (
     <>
       <Container top={position.top} left={position.left}>
         <PopupBox>
@@ -129,5 +137,5 @@ export function AboutUs({ onHide }) {
         </PopupBox>
       </Container>
     </>
-  ) : null;
+  );
 }

@@ -5,8 +5,13 @@ import UniverseIcon from "./IconImage/Universe.png";
 import MusicIcon from "./IconImage/Music.png";
 import DiscordIcon from "./IconImage/Discord.png";
 import SettingIcon from "./IconImage/Setting.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AboutUs } from "./AboutUs";
+import { OurProject } from "./OurProject";
+import { Universe } from "./Universe";
+import { Music } from "./Music";
+import { Setting } from "./Setting";
+import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
   background-color: blue;
@@ -38,7 +43,6 @@ const Icon = styled.div`
 `;
 const IconImg = styled.img`
   width: 100%;
-  height: 100%;
   /* object-fit: cover; */
 `;
 const IconTitle = styled.p`
@@ -49,10 +53,13 @@ const IconTitle = styled.p`
 export function Main() {
   // isPopupVisible 상태 변수를 선언하고 초기값 false로 설정
   //  setIsPopupVisible은 isPopupVisible 상태 변수를 업데이트하는 함수
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isAboutUsVisible, setIsAboutUsVisible] = useState(false);
+  const [isOurProjectVisible, setIsOurProjectVisible] = useState(false);
   const popupClick = () => {
-    if (!isPopupVisible) {
-      setIsPopupVisible(true);
+    if (!isAboutUsVisible) {
+      setIsAboutUsVisible(true);
+    } else if (!isOurProjectVisible) {
+      setIsOurProjectVisible(true);
     }
     // 처음 한번만 띄우기
     // setIsPopup(true);
@@ -60,6 +67,7 @@ export function Main() {
     // setIsPopupVisible(!isPopupVisible);
     // setIsPopup((prev) => !prev);
   };
+
   return (
     <>
       <Container>
@@ -69,18 +77,20 @@ export function Main() {
           </figure>
           <IconTitle>AboutUs</IconTitle>
         </Icon>
-        <Icon>
+        <Icon onClick={popupClick}>
           <figure>
             <IconImg src={OurProjectIcon} />
           </figure>
           <IconTitle>OurProject</IconTitle>
         </Icon>
-        <Icon>
-          <figure>
-            <IconImg src={UniverseIcon} />
-          </figure>
-          <IconTitle>Universe</IconTitle>
-        </Icon>
+        <NavLink to="/universe">
+          <Icon>
+            <figure>
+              <IconImg src={UniverseIcon} />
+            </figure>
+            <IconTitle>Universe</IconTitle>
+          </Icon>
+        </NavLink>
         <Icon>
           <figure>
             <IconImg src={MusicIcon} />
@@ -100,7 +110,12 @@ export function Main() {
           <IconTitle>Setting</IconTitle>
         </Icon>
       </Container>
-      {isPopupVisible && <AboutUs onHide={() => setIsPopupVisible(false)} />}
+      {isAboutUsVisible && (
+        <AboutUs onAboutUsHide={() => setIsAboutUsVisible(false)} />
+      )}
+      {isOurProjectVisible && (
+        <OurProject onOurProjectHide={() => setIsOurProjectVisible(false)} />
+      )}
     </>
   );
 }

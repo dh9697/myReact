@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import FullScreenIcon from "./IconImage/FullScreen.png";
 import { OpenWeather } from "./OpenWeather";
+import { Outlet } from "react-router-dom";
 
 const Container = styled.div`
   background-color: orange;
@@ -81,6 +82,7 @@ export function NavBar({ toggleFullScreen }) {
           </NavSection>
         </Nav>
       </Container>
+      <Outlet />
     </>
   );
 }
