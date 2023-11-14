@@ -17,6 +17,7 @@ import { Register } from "./Register";
 import { Logout } from "./Logout";
 
 const client = new QueryClient();
+
 export const GameContext = createContext();
 
 export function GameShop() {

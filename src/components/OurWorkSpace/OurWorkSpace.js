@@ -8,6 +8,8 @@ import { Register } from "./Register";
 import { Archive } from "./Archive";
 import { Bin } from "./Bin";
 import { NavBar } from "./NavBar";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import { useState } from "react";
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -24,6 +26,17 @@ html,body{
 `;
 
 export function OurWorkSpace() {
+  // NavBar toggleFullScreen Btn 눌렀을 때 FullScreen
+  const handle = useFullScreenHandle();
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const toggleFullScreen = () => {
+    if (isFullScreen) {
+      handle.exit();
+    } else {
+      handle.enter();
+    }
+    setIsFullScreen(!isFullScreen);
+  };
   // const navigate = useNavigate();
 
   // const isLoggedIn =
@@ -35,17 +48,25 @@ export function OurWorkSpace() {
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="universe" element={<NavBar />}>
-            <Route index element={<Universe />} />
-            <Route path="login" element={<Login />} />
-            <Route path="logout" element={<Logout />} />
-            <Route path="register" element={<Register />} />
-            <Route path="archive" element={<Archive />} />
-            <Route path="bin" element={<Bin />} />
-          </Route>
-        </Routes>
+        <FullScreen handle={handle}>
+          <Routes>
+            <Route
+              path="/"
+              element={<Home toggleFullScreen={toggleFullScreen} />}
+            ></Route>
+            <Route
+              path="universe"
+              element={<NavBar toggleFullScreen={toggleFullScreen} />}
+            >
+              <Route index element={<Universe />} />
+              <Route path="login" element={<Login />} />
+              <Route path="logout" element={<Logout />} />
+              <Route path="register" element={<Register />} />
+              <Route path="archive" element={<Archive />} />
+              <Route path="bin" element={<Bin />} />
+            </Route>
+          </Routes>
+        </FullScreen>
       </BrowserRouter>
     </>
   );
